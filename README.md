@@ -42,18 +42,6 @@ Optional server-side smoke check (creates a test student end-to-end, bypassing t
 npm run verify
 ```
 
-## Known limitations
-
-- No authentication yet — the dashboard is a single, unauthenticated counsellor view
-- No Redis caching or Docker setup — the app runs directly against Neon
-- No email/notification automation
-- The country/university matching logic is a static seed list, not a real rules engine
-- `students.create`'s two database writes (insert student, increment `seats_filled`)
-  aren't wrapped in a transaction — the neon-http driver doesn't support interactive
-  transactions — so a failure partway through can leave the seat count incremented
-  without a matching triage brief. Fixing this properly would mean switching to the
-  Neon Pool/WebSocket driver.
-
 ## Screenshot
 
 <!-- Replace with an actual screenshot of the counsellor dashboard once deployed. -->
