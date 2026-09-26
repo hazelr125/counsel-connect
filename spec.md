@@ -1,7 +1,7 @@
-# spec.md — GradGuide Intake & Counsellor Ops Dashboard
+# spec.md — CouncelConnect Intake & Counsellor Ops Dashboard
 
 ## 1. Overview
-A scoped, 5-hour vertical slice of the student-intake → AI-triage → counsellor-dashboard flow, modeled on how GradGuide's actual operation works (named counsellors, capacity-limited intakes, a curated country "book"). This is deliberately **not** the full JD stack — it's the
+A scoped, 5-hour vertical slice of the student-intake → AI-triage → counsellor-dashboard flow, modeled on how CouncelConnect's actual operation works (named counsellors, capacity-limited intakes, a curated country "book"). This is deliberately **not** the full JD stack — it's the
 thinnest slice that still proves the concept end-to-end. Anything not needed for that slice is pushed to §11 (Boundaries) rather than attempted half-finished.
 
 ## 2. Architecture

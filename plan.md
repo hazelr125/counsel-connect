@@ -1,4 +1,4 @@
-# plan.md — GradGuide Intake & Counsellor Ops Dashboard
+# plan.md — CouncelConnect Intake & Counsellor Ops Dashboard
 
 Workflow: **Specification → Implementation Plan → Implementation**
 

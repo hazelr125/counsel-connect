@@ -1,22 +1,25 @@
-# GradGuide — Intake & Counsellor Ops Dashboard
+# CounselConnect
 
-A 5-hour vertical slice of GradGuide's core operating loop: a student submits an intake
-form, Gemini generates a triage brief from their profile, and a counsellor works the
-result from a dense ops dashboard. It's deliberately not the full product — it's the
-thinnest slice that proves the concept end-to-end. See `spec.md` for the full
-architecture and `plan.md` for how the build was timeboxed.
+A student intake and counsellor ops tool: a student submits their profile through an
+intake form, Gemini generates a short AI triage brief from that profile, and a
+counsellor works the resulting queue from a dashboard — reviewing briefs, tracking
+status, and watching how full the current intake cohort is.
 
-## Why this shape
+## What it does
 
-GradGuide's actual operation runs on named counsellors working capacity-limited intake
-cohorts against a curated country "book" — a counsellor isn't reading raw applications
-cold, they're triaging a queue against a seat cap, and they need a fast read on each
-student before deciding who to prioritize. This build tests whether an AI-generated
-triage summary can stand in for that first read: does a 2-3 sentence brief plus
-suggested countries actually save a counsellor time when they're scanning a list, not a
-stack of individual forms? The seat counter and status pipeline exist because those are
-the two numbers a counsellor actually watches day to day — how full is this intake, and
-where is each student in the funnel.
+- **Intake form** — students submit their profile (course interest, budget, CGPA,
+  work experience, country preference)
+- **AI triage** — each submission is sent to Gemini, which returns a short summary,
+  suggested countries, and any flags worth a counsellor's attention
+- **Counsellor dashboard** — a table of students with their triage brief and current
+  status (new / reviewed / contacted / converted), updatable per row
+- **Seat counter** — a live read on how many seats in the current intake are filled
+  against its cap
+
+## Tech stack
+
+Next.js (App Router) + TypeScript, tRPC, Drizzle ORM + PostgreSQL (Neon), Tailwind CSS,
+Google Gemini API.
 
 ## Setup
 
@@ -41,13 +44,15 @@ npm run verify
 
 ## Known limitations
 
-This is a 5-hour scope, not a finished product — see `spec.md` §11 for what was
-deliberately left out (auth, Redis, email automation, the real country "book"). Also
-worth knowing: `students.create`'s two DB writes (insert student, increment
-`seats_filled`) aren't wrapped in a transaction — the neon-http driver doesn't support
-interactive transactions — so a failure partway through can leave the seat count
-incremented without a matching triage brief. Acceptable at this scope per spec.md §11;
-would need the Neon Pool/WebSocket driver to close properly.
+- No authentication yet — the dashboard is a single, unauthenticated counsellor view
+- No Redis caching or Docker setup — the app runs directly against Neon
+- No email/notification automation
+- The country/university matching logic is a static seed list, not a real rules engine
+- `students.create`'s two database writes (insert student, increment `seats_filled`)
+  aren't wrapped in a transaction — the neon-http driver doesn't support interactive
+  transactions — so a failure partway through can leave the seat count incremented
+  without a matching triage brief. Fixing this properly would mean switching to the
+  Neon Pool/WebSocket driver.
 
 ## Screenshot
 

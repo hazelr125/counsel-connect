@@ -52,6 +52,9 @@ export const studentsRouter = router({
         countryPreference: input.countryPreference,
       });
 
+      if (!student) {
+        throw new Error("Student record was not created successfully.");
+      }
       // Always write a triage_briefs row so a reviewer can see an attempt
       // was made at generatedAt; fields are null when generation failed
       // (spec.md §4 — "store null... let the student record still save").
