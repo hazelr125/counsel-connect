@@ -1,6 +1,6 @@
 # CounselConnect
 
-CounselConnect is a student-intake and counsellor operations tool for study-abroad
+CounselConnect is a student-intake and counsellor operations tool for
 admissions teams. A student submits an academic and study-preference profile, the
 server generates an optional Gemini triage brief, and a counsellor reviews and
 progresses the submission from an internal dashboard.
@@ -229,11 +229,9 @@ src/
 
 ## Scope and limitations
 
-The current build intentionally does not include:
+The current build does not include:
 
 - Authentication or role-based authorization; the dashboard is public when deployed.
-- Multi-intake management; the server currently treats the first intake row as the
-  current intake.
 - Email, notification, deadline, or capacity-alert automation.
 - A full country/university recommendation catalogue or admissions rules engine.
 - A background job for AI generation; the create mutation currently waits for the
