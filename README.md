@@ -1,6 +1,6 @@
 # CounselConnect
 
-LINK:https://counsel-connect-2o5dmig88-hazelr125s-projects.vercel.app/
+LINK:https://counsel-connect-six.vercel.app/
 
 CounselConnect is a student-intake and counsellor operations tool for
 admissions teams. A student submits an academic and study-preference profile, the
