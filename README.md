@@ -43,6 +43,5 @@ npm run verify
 ```
 
 ## Screenshot
-
-<!-- Replace with an actual screenshot of the counsellor dashboard once deployed. -->
-![Counsellor dashboard screenshot placeholder](./screenshot.png)
+<img width="1279" height="623" alt="image" src="https://github.com/user-attachments/assets/37cd5f52-55ac-407c-bfdf-0a3e8affffda" />
+<img width="1279" height="625" alt="image" src="https://github.com/user-attachments/assets/d7bd2ecc-a8a5-41cb-940c-288e284afe00" />
