@@ -10,6 +10,7 @@ import {
 } from "../db/schema";
 import { studentIntakeSchema as createStudentInput } from "@/lib/validation/student";
 import { generateTriageBrief } from "../ai/triage";
+import { redis } from "../redis"; // <-- Update this path to your redis index.ts
 
 export const studentsRouter = router({
   // Inserts the student, increments the active intake's seats_filled, and
@@ -37,6 +38,13 @@ export const studentsRouter = router({
           .update(intakes)
           .set({ seatsFilled: activeIntake.seatsFilled + 1 })
           .where(eq(intakes.id, activeIntake.id));
+
+        // INVALDATION: Bust the cache so the frontend counter updates immediately
+        try {
+          await redis.del("intake:current");
+        } catch (error) {
+          console.error("Redis DEL error:", error);
+        }
       }
 
       // spec.md §4 — blocking `await` for now, per plan.md's cut-line note
